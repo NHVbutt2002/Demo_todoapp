@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "a44b3f7c7752b5ab1fb451c4d9aad1e33edadf9a5b337d32f718e5a14bfbb156"
+build_start_time: [1693147165, 672827000]
+build_end_time: [1693147176, 514872000]
+inputs:
+  "/Users/mac/but flutter/Bai tap cua but/todoapp/macos/Flutter/GeneratedPluginRegistrant.swift": [1693147147, 624701781]
+  "/Users/mac/but flutter/Bai tap cua but/todoapp/macos/Runner/AppDelegate.swift": [1686756980, 0]
+  "/Users/mac/but flutter/Bai tap cua but/todoapp/macos/Runner/MainFlutterWindow.swift": [1688912994, 776319321]

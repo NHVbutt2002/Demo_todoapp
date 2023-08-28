@@ -67,22 +67,12 @@ class Todo2 extends StatefulWidget {
 }
 
 class _Todo2State extends State<Todo2> {
-  late TextEditingController controller;
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController();
-  }
+  int counter = 0;
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  bool? isChecked = false;
-  void add() {
-    Navigator.of(context).pop(controller.text);
+  void _incrementCounter() {
+    setState(() {
+      counter++;
+    });
   }
 
   @override
@@ -95,36 +85,9 @@ class _Todo2State extends State<Todo2> {
             child: TextButton(
                 onPressed: () async {
                   showDialog<String>(
+                      barrierColor: Colors.transparent,
                       context: context,
-                      builder: (context) => AlertDialog(
-                            title: const Text('Create Task'),
-                            content: Row(
-                              children: [
-                                const Expanded(
-                                  child: TextField(
-                                    autofocus: true,
-                                    decoration: InputDecoration(
-                                        hintText: 'Wrire Task Here ... '),
-                                  ),
-                                ),
-                                Checkbox(
-                                    tristate: true,
-                                    value: isChecked,
-                                    activeColor: Colors.blueAccent,
-                                    onChanged: (newBool) {
-                                      setState(() {
-                                        isChecked = newBool;
-                                      });
-                                    }),
-                              ],
-                            ),
-                            actions: [
-                              TextButton(
-                                child: Text('Add'),
-                                onPressed: add,
-                              )
-                            ],
-                          ));
+                      builder: (context) => const Alerdialog());
                 },
                 child: const Text(
                   'Create Task',
@@ -134,6 +97,12 @@ class _Todo2State extends State<Todo2> {
                       fontWeight: FontWeight.bold),
                 )),
           ),
+          Expanded(
+              child: ListView.builder(
+                  physics: ScrollPhysics(),
+                  itemCount: 8,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {})),
           const SizedBox(
             height: 250,
           ),
@@ -157,5 +126,66 @@ class Todo3 extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class Alerdialog extends StatefulWidget {
+  const Alerdialog({super.key});
+
+  @override
+  State<Alerdialog> createState() => _AlerdialogState();
+}
+
+class _AlerdialogState extends State<Alerdialog> {
+  void add() {
+    Navigator.of(context).pop(_controller.text);
+  }
+
+  final TextEditingController _controller = TextEditingController();
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    @override
+    void initState() {
+      super.initState();
+    }
+
+    @override
+    void dispose() {
+      _controller.dispose();
+      super.dispose();
+    }
+
+    return Material(
+        color: Colors.transparent,
+        child: AlertDialog(
+          title: const Text('Create Task'),
+          content: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  autofocus: true,
+                  decoration: InputDecoration(hintText: 'Wrire Task Here ... '),
+                ),
+              ),
+              Checkbox(
+                  value: isChecked,
+                  activeColor: Colors.blueAccent,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isChecked = value!;
+                    });
+                  }),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('Add'),
+              onPressed: add,
+            )
+          ],
+        ));
   }
 }
